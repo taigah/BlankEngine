@@ -1,6 +1,6 @@
 {
   "name": "blankengine",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple game engine for javascript based on EaselJS",
   "main": "index.js",
   "scripts": {

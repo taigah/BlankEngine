@@ -4,6 +4,13 @@ const Entity = require('./entity')
 
 class Game extends Entity
 {
+  /**
+   * Game's contructor
+   * @param  {String} canvasId
+   * @param  {Number} width     width of the canvas
+   * @param  {Number} height    height of the canvas
+   * @param  {State} state      first state to load
+   */
   constructor(canvasId, width, height, state) {
     super()
 
@@ -28,34 +35,42 @@ class Game extends Entity
     this.switchState(state)
   }
 
-  update(e) {
-    super.update(e)
-  }
-
+  /**
+   * Adds a state
+   * @param {State} state
+   * @param {Mixed} ...params
+   */
   addState(state, ...params) {
     this.state = state
     this.add(new this.state(...params), 'state')
   }
 
+  /**
+   * Destroys the current state
+   */
   destroyState() {
     if (this.state !== null) {
       this.getChild('state').destroy()
     }
   }
 
+  /**
+   * Switches to another state
+   * @param  {State} state
+   * @param  {Mixed} ...params
+   */
   switchState(state, ...params) {
     console.log(state)
     this.destroyState()
     this.addState(state, ...params)
   }
 
+  /**
+   * Resets current state
+   */
   resetState() {
     this.destroyState()
     this.addState(this.state)
-  }
-
-  destroy() {
-    super.destroy()
   }
 }
 

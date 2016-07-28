@@ -10,13 +10,29 @@ class Entity
     this.params = params
   }
 
+  /**
+   * The function called when the entity was successfuly added to his parent
+   * @param  {Mixed} ...params
+   */
+  create(...params) { }
+
+  /**
+   * A function called every frame and updating every children objects
+   * @param  {Object} e event delegate by createJS tick event listener
+   */
   update(e) {
     for (let i in this.children) {
       this.children[i].update(e)
     }
   }
 
+  /**
+   * Adds an entity (createJS shape) or a children (an instance of a class extended by Entity)
+   * @param {Object} entity a createJS shape or an instance of a class extended by Entity
+   * @param {String} id
+   */
   add(entity, id) {
+    // If the entity is a createJS shape
     if (!(entity instanceof Entity)) {
       id = id || ++this.entitiesIncrement
       this.stage.addChild(entity)
@@ -24,38 +40,53 @@ class Entity
       return
     }
 
-    entity.id = id || ++this.childrenIncrement
+    entity.id = id || ++this.childrenIncrement // Generating id if no id was passed to the function
 
     if (this.children[entity.id] !== undefined) {
       throw new Error('Id already taken')
     }
 
+    // Setting global references
     entity.game = this.game
     entity.mousepos = this.mousepos
     entity.stage = this.stage
     entity.parent = this
     if (this.state && !this.state.prototype instanceof require('./state') || this instanceof require('./state')) {
-      entity.state = this.state || this
+      entity.state = this.state || this // References to the current State
     }
 
     entity.create(...entity.params)
     this.children[entity.id] = entity
   }
 
+  /**
+   * Destroys the Entity
+   */
   destroy() {
+    // Destroying entity's children
     for (let i in this.children) {
       this.children[i].destroy()
     }
+    // Destroying entity's createJS shape
     for (let i in this.entities) {
       this.stage.removeChild(this.entities[i])
     }
+    // Deleting entity from parent array
     delete this.parent.children[this.id]
   }
 
+  /**
+   * Retrieves a child
+   * @param  {String} id
+   */
   getChild(id) {
     return this.children[id]
   }
 
+  /**
+   * Retrieves an entity
+   * @param  {String} id
+   */
   getEntity(id) {
     return this.entities[id]
   }
