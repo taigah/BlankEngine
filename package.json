@@ -1,0 +1,24 @@
+{
+  "name": "blankengine",
+  "version": "1.0.0",
+  "description": "A simple game engine for javascript based on EaselJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taigah/BlankEngine.git"
+  },
+  "keywords": [
+    "game",
+    "engine",
+    "javascript"
+  ],
+  "author": "taigah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/taigah/BlankEngine/issues"
+  },
+  "homepage": "https://github.com/taigah/BlankEngine#readme"
+}
