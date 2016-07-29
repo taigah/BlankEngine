@@ -27,8 +27,8 @@ class Entity
   }
 
   /**
-   * Adds an entity (createJS shape) or a children (an instance of a class extended by Entity)
-   * @param {Object} entity a createJS shape or an instance of a class extended by Entity
+   * Adds an entity (createJS shape) or a child (an instance of Entity)
+   * @param {Object} entity a createJS shape or an instance of Entity
    * @param {String} id
    */
   add(entity, id) {
