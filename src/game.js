@@ -22,9 +22,10 @@ class Game extends Entity
     createjs.Ticker.addEventListener('tick', this.stage)
     createjs.Ticker.addEventListener('tick', (e) => this.update(e))
 
-    this.stage.on('stagemousemove', (e) => {
-      this.mousepos.x = e.stageX
-      this.mousepos.y = e.stageY
+    document.addEventListener('mousemove', (e) => {
+      let rect = this.stage.canvas.getBoundingClientRect()
+      this.mousepos.x = e.clientX - rect.left
+      this.mousepos.y = e.clientY - rect.top
     })
 
     this.mousepos = { x: this.stage.width / 2, y: this.stage.height / 2 }
@@ -60,7 +61,6 @@ class Game extends Entity
    * @param  {Mixed} ...params
    */
   switchState(state, ...params) {
-    console.log(state)
     this.destroyState()
     this.addState(state, ...params)
   }

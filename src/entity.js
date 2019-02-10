@@ -5,8 +5,11 @@ class Entity
   constructor(...params) {
     this.children = {}
     this.entities = {}
+    this.animations = {}
     this.childrenIncrement = 0
     this.entitiesIncrement = 0
+    this.animationsIncrement = 0
+    this.frozen = false
     this.params = params
   }
 
@@ -22,7 +25,9 @@ class Entity
    */
   update(e) {
     for (let i in this.children) {
-      this.children[i].update(e)
+      if (!this.children[i].frozen) {
+        this.children[i].update(e)
+      }
     }
   }
 
@@ -57,6 +62,16 @@ class Entity
 
     entity.create(...entity.params)
     this.children[entity.id] = entity
+  }
+
+  /**
+   * Adds an animation
+   * @param {Object} animation
+   * @param {String} name
+   */
+  addAnimation(animation, name) {
+    id = id || ++this.childrenIncrement // Generating id if no id was passed to the function
+
   }
 
   /**
